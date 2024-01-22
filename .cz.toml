@@ -1,0 +1,8 @@
+[tool.commitizen]
+name = "cz_conventional_commits"
+tag_format = "$version"
+version_scheme = "semver"
+version_files = ["build.gradle.kts:version"]
+version = "0.0.1"
+update_changelog_on_bump = true
+major_version_zero = true
