@@ -23,7 +23,7 @@ repositories {
 
 dependencies {
     // spring boot
-    implementation("org.springframework.boot:spring-boot-autoconfigure:3.2.1")
+    implementation("org.springframework.boot:spring-boot-autoconfigure:3.2.2")
 
     // spring security
     implementation("org.springframework.security:spring-security-config:6.2.1")
