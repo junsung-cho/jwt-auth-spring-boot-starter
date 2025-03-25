@@ -75,16 +75,7 @@ publishing {
         }
     }
     repositories {
-        maven {
-            val username = System.getenv("OSSRH_USERNAME")
-            val password = System.getenv("OSSRH_PASSWORD")
-
-            setUrl("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
-            credentials {
-                this.username = username
-                this.password = password
-            }
-        }
+        mavenLocal()
     }
 }
 

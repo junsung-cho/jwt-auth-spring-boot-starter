@@ -9,12 +9,12 @@ The "JWT Authorization Spring Boot Starter" is designed to simplify the implemen
 <dependency>
     <groupId>dev.junsung</groupId>
     <artifactId>jwt-auth-spring-boot-starter</artifactId>
-    <version>0.0.3</version>
+    <version>0.0.4</version>
 </dependency>
 ```
 
 ## Gradle
 
 ```kotlin
-implementation("dev.junsung:jwt-auth-spring-boot-starter:0.0.3")
+implementation("dev.junsung:jwt-auth-spring-boot-starter:0.0.4")
 ```
