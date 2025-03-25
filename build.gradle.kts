@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "dev.junsung"
-version = "0.0.3"
+version = "0.0.4"
 
 allOpen {
     annotation("org.springframework.context.annotation.Configuration")
