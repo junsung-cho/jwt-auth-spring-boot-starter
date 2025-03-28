@@ -1,2 +1,2 @@
 [*.{kt,kts}]
-ktlint_standard_max-line-length = disabled
+ktlint_chain_method_rule_force_multiline_when_chain_operator_count_greater_or_equal_than = unset
