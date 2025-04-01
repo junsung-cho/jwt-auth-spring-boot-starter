@@ -32,9 +32,8 @@ class UsernamePasswordAuthenticationConverter(
             password = request.getParameter(passwordParameter)
         }
 
-        return UsernamePasswordAuthenticationToken.unauthenticated(
-            username?.trim() ?: "",
-            password ?: "",
-        ).apply { details = request }
+        return UsernamePasswordAuthenticationToken
+            .unauthenticated(username?.trim() ?: "", password ?: "")
+            .apply { details = request }
     }
 }

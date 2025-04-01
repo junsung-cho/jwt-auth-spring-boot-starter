@@ -51,9 +51,7 @@ class UsernamePasswordAuthenticationFilter(
         }
     }
 
-    private fun attemptAuthentication(authRequest: Authentication): Authentication {
-        return authenticationManager.authenticate(authRequest)
-    }
+    private fun attemptAuthentication(authRequest: Authentication): Authentication = authenticationManager.authenticate(authRequest)
 
     private fun successfulAuthentication(
         request: HttpServletRequest,

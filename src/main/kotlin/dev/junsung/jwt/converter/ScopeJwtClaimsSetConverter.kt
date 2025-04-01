@@ -19,9 +19,8 @@ class ScopeJwtClaimsSetConverter : JwtClaimsSetConverter() {
             .claims { it.putAll(convertAuthentication(authentication)) }
             .build()
 
-    private fun convertAuthentication(authentication: Authentication): Map<String, Any> {
-        return mapOf(DEFAULT_AUTHORITY_NAME to authentication.authorities.map { it.toScope() })
-    }
+    private fun convertAuthentication(authentication: Authentication): Map<String, Any> =
+        mapOf(DEFAULT_AUTHORITY_NAME to authentication.authorities.map { it.toScope() })
 
     private fun GrantedAuthority.toScope(): String = authority.removePrefix(DEFAULT_AUTHORITY_PREFIX)
 }

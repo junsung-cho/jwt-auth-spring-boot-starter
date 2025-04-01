@@ -53,7 +53,9 @@ publishing {
             from(components["java"])
             pom {
                 name.set("JWT Authorization Spring Boot Starter")
-                description.set("The \"JWT Authorization Spring Boot Starter\" is designed to simplify the implementation of JSON Web Token (JWT) based authentication and authorization within Spring Boot applications. This starter provides a robust foundation for developers looking to secure their Spring Boot applications using JWT, a widely adopted industry standard for token-based authentication.")
+                description.set(
+                    "The \"JWT Authorization Spring Boot Starter\" is designed to simplify the implementation of JSON Web Token (JWT) based authentication and authorization within Spring Boot applications. This starter provides a robust foundation for developers looking to secure their Spring Boot applications using JWT, a widely adopted industry standard for token-based authentication.",
+                )
                 url.set("https://github.com/junsung-cho/jwt-auth-spring-boot-starter")
                 licenses {
                     license {
