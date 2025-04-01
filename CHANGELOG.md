@@ -1,3 +1,11 @@
+## 0.0.5 (2025-04-01)
+
+### Fix
+
+- use kotlin.time.Duration for timeToLive
+- **.editorconfig**: update .editorconfig
+- **README.md**: update version
+
 ## 0.0.4 (2025-03-25)
 
 ### Fix
