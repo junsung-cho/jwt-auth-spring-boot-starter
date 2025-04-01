@@ -28,6 +28,7 @@ data class JwtProperties(
     var tokenName: String = "token",
     var algorithm: String? = "ES512",
     var encryptionMethod: String? = null,
+    var keySize: Int? = null,
 ) {
     private val logger = LoggerFactory.getLogger(this.javaClass)
 
@@ -47,8 +48,8 @@ data class JwtProperties(
         val algorithm = algorithm()
         return when (KeyType.forAlgorithm(algorithm)) {
             KeyType.EC -> ECKeyGenerator(Curve.forJWSAlgorithm(JWSAlgorithm(algorithm.name)).first())
-            KeyType.RSA -> RSAKeyGenerator(2048)
-            KeyType.OCT -> OctetSequenceKeyGenerator(256)
+            KeyType.RSA -> RSAKeyGenerator(keySize ?: 2048)
+            KeyType.OCT -> OctetSequenceKeyGenerator(keySize ?: 256)
             KeyType.OKP -> OctetKeyPairGenerator(Curve.forJWSAlgorithm(JWSAlgorithm(algorithm.name)).first())
             else -> throw IllegalStateException("${algorithm.name} couldn't be inferred")
         }.algorithm(algorithm)
