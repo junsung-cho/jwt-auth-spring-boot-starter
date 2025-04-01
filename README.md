@@ -24,14 +24,14 @@ Add the dependency to your project.
 <dependency>
     <groupId>dev.junsung</groupId>
     <artifactId>jwt-auth-spring-boot-starter</artifactId>
-    <version>0.0.4</version>
+    <version>0.0.5</version>
 </dependency>
 ```
 
 #### Gradle
 
 ```kotlin
-implementation("dev.junsung:jwt-auth-spring-boot-starter:0.0.4")
+implementation("dev.junsung:jwt-auth-spring-boot-starter:0.0.5")
 ```
 
 ### Usage
@@ -43,7 +43,7 @@ Include the following dependencies in your `build.gradle.kts` file:
 ```kotlin
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server")
-    implementation("dev.junsung:jwt-auth-spring-boot-starter:0.0.4")
+    implementation("dev.junsung:jwt-auth-spring-boot-starter:0.0.5")
 }
 ```
 
