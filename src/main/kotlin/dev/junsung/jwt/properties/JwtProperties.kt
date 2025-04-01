@@ -31,7 +31,7 @@ data class JwtProperties(
 ) {
     private val logger = LoggerFactory.getLogger(this.javaClass)
 
-    fun timeToLive(): Long = Duration.parse(timeToLive).inWholeMilliseconds
+    fun timeToLive(): Duration = Duration.parse(timeToLive)
 
     fun requestMatcher() = AntPathRequestMatcher(tokenIssueUrl, httpMethod)
 
@@ -58,8 +58,8 @@ data class JwtProperties(
     }
 
     companion object {
-        fun Algorithm.toNamedAlgorithm(): Algorithm {
-            return when (this.name) {
+        fun Algorithm.toNamedAlgorithm(): Algorithm =
+            when (this.name) {
                 JWSAlgorithm.HS256.name -> JWSAlgorithm.HS256
                 JWSAlgorithm.HS384.name -> JWSAlgorithm.HS384
                 JWSAlgorithm.HS512.name -> JWSAlgorithm.HS512
@@ -97,6 +97,5 @@ data class JwtProperties(
                 JWEAlgorithm.PBES2_HS512_A256KW.name -> JWEAlgorithm.PBES2_HS512_A256KW
                 else -> throw IllegalStateException("$this couldn't be inferred")
             }
-        }
     }
 }

@@ -20,9 +20,10 @@ import org.springframework.security.oauth2.jwt.JwtClaimsSet
 import org.springframework.security.oauth2.jwt.JwtEncoder
 import org.springframework.security.oauth2.jwt.JwtEncoderParameters
 import java.time.Instant
+import kotlin.time.Duration
 
 class BearerAuthenticationProvider(
-    private val timeToLive: Long,
+    private val timeToLive: Duration,
     private val algorithm: Algorithm,
     private val passwordEncoder: PasswordEncoder,
     private val jwtEncoder: JwtEncoder,
@@ -90,13 +91,15 @@ class BearerAuthenticationProvider(
                 val jwsHeader = jwtHeaderConverter.convert(jwsHeaderBuilder)
 
                 val issuedAt = Instant.now()
-                val expiresAt = issuedAt.plusMillis(timeToLive)
-                val jwtClaimsSetBuilder =
-                    JwtClaimsSet.builder()
+                val builder =
+                    JwtClaimsSet
+                        .builder()
                         .issuedAt(issuedAt)
                         .notBefore(issuedAt)
-                        .expiresAt(expiresAt)
-                val claims = jwtClaimsSetConverter.convert(jwtClaimsSetBuilder, result)
+                if (timeToLive.isFinite()) {
+                    builder.expiresAt(issuedAt.plusMillis(timeToLive.inWholeMilliseconds))
+                }
+                val claims = jwtClaimsSetConverter.convert(builder, result)
 
                 val jwtEncoderParameters = JwtEncoderParameters.from(jwsHeader, claims)
                 jwtEncoder.encode(jwtEncoderParameters).tokenValue

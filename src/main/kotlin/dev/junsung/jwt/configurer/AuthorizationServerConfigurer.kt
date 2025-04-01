@@ -23,6 +23,7 @@ import org.springframework.security.web.authentication.AuthenticationConverter
 import org.springframework.security.web.authentication.NoOpAuthenticationEntryPoint
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 import org.springframework.security.web.util.matcher.RequestMatcher
+import kotlin.time.Duration
 
 class AuthorizationServerConfigurer<H : HttpSecurityBuilder<H>>(
     private val context: ApplicationContext,
@@ -30,7 +31,7 @@ class AuthorizationServerConfigurer<H : HttpSecurityBuilder<H>>(
     private var authenticationEntryPoint: AuthenticationEntryPoint
     private var authenticationConverter: AuthenticationConverter
     private var requestMatcher: RequestMatcher
-    private var timeToLive: Long
+    private var timeToLive: Duration
     private var tokenName: String
     private var onSuccessfulAuthentication: (Authentication) -> Unit
     private var onUnsuccessfulAuthentication: (Authentication?) -> Unit
@@ -89,7 +90,7 @@ class AuthorizationServerConfigurer<H : HttpSecurityBuilder<H>>(
 
     fun requestMatcher(matcher: RequestMatcher): AuthorizationServerConfigurer<H> = apply { requestMatcher = matcher }
 
-    fun timeToLive(value: Long): AuthorizationServerConfigurer<H> = apply { this.timeToLive = value }
+    fun timeToLive(value: Duration): AuthorizationServerConfigurer<H> = apply { this.timeToLive = value }
 
     fun tokenName(value: String): AuthorizationServerConfigurer<H> = apply { tokenName = value }
 
