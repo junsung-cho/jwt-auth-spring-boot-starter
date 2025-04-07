@@ -1,11 +1,11 @@
 package dev.junsung.jwt.handler
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import dev.junsung.exception.RestException
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
 import org.springframework.security.core.AuthenticationException
 import org.springframework.security.web.AuthenticationEntryPoint
-import dev.junsung.exception.RestException
 
 class RestAuthenticationEntryPoint : AuthenticationEntryPoint {
     private val objectMapper = ObjectMapper()
