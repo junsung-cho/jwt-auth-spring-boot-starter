@@ -15,6 +15,9 @@ allOpen {
 java {
     withJavadocJar()
     withSourcesJar()
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
 }
 
 repositories {
@@ -38,10 +41,15 @@ dependencies {
 
     // log4j
     implementation("org.slf4j:slf4j-api:2.0.17")
+
+    // exception
+    implementation("dev.junsung:exception:0.0.2")
 }
 
 kotlin {
-    jvmToolchain(21)
+    compilerOptions {
+        freeCompilerArgs.addAll("-Xjsr305=strict")
+    }
 }
 
 publishing {
