@@ -1,3 +1,19 @@
+## 0.2.0 (2025-05-26)
+
+### Feat
+
+- add AuthorizationServerDsl
+- add key size property for RSA and OCT
+
+### Fix
+
+- **.gitattributes**: add .gitattributes
+- **.editorconfig**: update .editorconfig
+
+### Refactor
+
+- **JwtProperties**: replace ant path matcher with path pattern matcher
+
 ## 0.1.0 (2025-04-08)
 
 ### Feat
