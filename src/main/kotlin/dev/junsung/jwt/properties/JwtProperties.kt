@@ -14,7 +14,9 @@ import com.nimbusds.jose.util.Base64
 import dev.junsung.jwt.configurer.UsernamePasswordAuthenticationConverter
 import org.slf4j.LoggerFactory
 import org.springframework.boot.context.properties.ConfigurationProperties
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher
+import org.springframework.http.HttpMethod
+import org.springframework.security.web.servlet.util.matcher.PathPatternRequestMatcher
+import org.springframework.security.web.util.matcher.RequestMatcher
 import kotlin.time.Duration
 
 @ConfigurationProperties("jwt")
@@ -34,7 +36,7 @@ data class JwtProperties(
 
     fun timeToLive(): Duration = Duration.parse(timeToLive)
 
-    fun requestMatcher() = AntPathRequestMatcher(tokenIssueUrl, httpMethod)
+    fun requestMatcher(): RequestMatcher = PathPatternRequestMatcher.withDefaults().matcher(HttpMethod.valueOf(httpMethod), tokenIssueUrl)
 
     fun authenticationConverter() = UsernamePasswordAuthenticationConverter(usernameParameter, passwordParameter)
 
