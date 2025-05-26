@@ -20,8 +20,8 @@ class UsernamePasswordAuthenticationFilter(
     private val authenticationManager: AuthenticationManager,
     private val authenticationEntryPoint: AuthenticationEntryPoint,
     private val authenticationConverter: AuthenticationConverter,
-    private val onSuccessfulAuthentication: (Authentication) -> Unit,
-    private val onUnsuccessfulAuthentication: (Authentication?) -> Unit,
+    private val onSuccessfulAuthentication: (Authentication, HttpServletRequest) -> Unit,
+    private val onUnsuccessfulAuthentication: (Authentication, HttpServletRequest) -> Unit,
 ) : GenericFilterBean() {
     override fun doFilter(
         request: ServletRequest,
@@ -60,7 +60,7 @@ class UsernamePasswordAuthenticationFilter(
         authResult: Authentication,
     ) {
         if (authResult is BearerAuthenticationToken) {
-            onSuccessfulAuthentication(authResult)
+            onSuccessfulAuthentication(authResult, request)
             response.contentType = "application/json"
             response.writer.println("{\"$tokenName\":\"${authResult.credentials}\"}")
         } else {
@@ -69,12 +69,12 @@ class UsernamePasswordAuthenticationFilter(
     }
 
     private fun unsuccessfulAuthentication(
-        authRequest: Authentication?,
-        request: HttpServletRequest?,
-        response: HttpServletResponse?,
-        exception: AuthenticationException?,
+        authRequest: Authentication,
+        request: HttpServletRequest,
+        response: HttpServletResponse,
+        exception: AuthenticationException,
     ) {
-        onUnsuccessfulAuthentication(authRequest)
+        onUnsuccessfulAuthentication(authRequest, request)
         SecurityContextHolder.clearContext()
         authenticationEntryPoint.commence(request, response, exception)
     }

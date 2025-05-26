@@ -4,6 +4,7 @@ import com.nimbusds.jose.Algorithm
 import dev.junsung.jwt.converter.JwtClaimsSetConverter
 import dev.junsung.jwt.converter.JwtHeaderConverter
 import dev.junsung.jwt.properties.JwtProperties
+import jakarta.servlet.http.HttpServletRequest
 import org.springframework.beans.factory.BeanFactory
 import org.springframework.beans.factory.NoSuchBeanDefinitionException
 import org.springframework.context.ApplicationContext
@@ -33,8 +34,8 @@ class AuthorizationServerConfigurer<H : HttpSecurityBuilder<H>>(
     private var requestMatcher: RequestMatcher
     private var timeToLive: Duration
     private var tokenName: String
-    private var onSuccessfulAuthentication: (Authentication) -> Unit
-    private var onUnsuccessfulAuthentication: (Authentication?) -> Unit
+    private var onSuccessfulAuthentication: (Authentication, HttpServletRequest) -> Unit
+    private var onUnsuccessfulAuthentication: (Authentication, HttpServletRequest) -> Unit
 
     private val jwtProperties: JwtProperties
         get() = this.context.getBean(JwtProperties::class.java)
@@ -59,8 +60,8 @@ class AuthorizationServerConfigurer<H : HttpSecurityBuilder<H>>(
         authenticationEntryPoint = NoOpAuthenticationEntryPoint()
         authenticationConverter = jwtProperties.authenticationConverter()
         requestMatcher = jwtProperties.requestMatcher()
-        onSuccessfulAuthentication = {}
-        onUnsuccessfulAuthentication = {}
+        onSuccessfulAuthentication = { _: Authentication, _: HttpServletRequest -> }
+        onUnsuccessfulAuthentication = { _: Authentication, _: HttpServletRequest -> }
     }
 
     override fun init(http: H) {
@@ -94,9 +95,11 @@ class AuthorizationServerConfigurer<H : HttpSecurityBuilder<H>>(
 
     fun tokenName(value: String): AuthorizationServerConfigurer<H> = apply { tokenName = value }
 
-    fun processSuccess(block: (Authentication) -> Unit): AuthorizationServerConfigurer<H> = apply { onSuccessfulAuthentication = block }
+    fun processSuccess(block: (Authentication, HttpServletRequest) -> Unit): AuthorizationServerConfigurer<H> =
+        apply { onSuccessfulAuthentication = block }
 
-    fun processFailure(block: (Authentication?) -> Unit): AuthorizationServerConfigurer<H> = apply { onUnsuccessfulAuthentication = block }
+    fun processFailure(block: (Authentication, HttpServletRequest) -> Unit): AuthorizationServerConfigurer<H> =
+        apply { onUnsuccessfulAuthentication = block }
 
     private fun <T> BeanFactory.getBeanOrNull(requiredType: Class<T>): T? =
         try {

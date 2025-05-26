@@ -43,7 +43,7 @@ dependencies {
     implementation("org.slf4j:slf4j-api:2.0.17")
 
     // exception
-    implementation("dev.junsung:exception:0.0.3")
+    implementation("dev.junsung:exception:0.0.4")
 }
 
 kotlin {
