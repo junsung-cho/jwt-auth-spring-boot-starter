@@ -2,7 +2,7 @@
 name = "cz_conventional_commits"
 tag_format = "$version"
 version_scheme = "semver"
-version_files = ["build.gradle.kts:version"]
-version = "0.2.0"
+version_files = ["build.gradle.kts:version", "README.md:<version>", "README.md:implementation"]
+version = "0.2.1"
 update_changelog_on_bump = true
 major_version_zero = true
