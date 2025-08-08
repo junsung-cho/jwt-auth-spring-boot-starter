@@ -26,15 +26,15 @@ repositories {
 
 dependencies {
     // spring boot
-    implementation("org.springframework.boot:spring-boot-autoconfigure:3.5.0")
+    implementation("org.springframework.boot:spring-boot-autoconfigure:3.5.4")
 
     // spring security
-    implementation("org.springframework.security:spring-security-config:6.5.0")
-    implementation("org.springframework.security:spring-security-oauth2-jose:6.5.0")
-    implementation("org.springframework.security:spring-security-web:6.5.0")
+    implementation("org.springframework.security:spring-security-config:6.5.2")
+    implementation("org.springframework.security:spring-security-oauth2-jose:6.5.2")
+    implementation("org.springframework.security:spring-security-web:6.5.2")
 
     // jackson
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.19.0")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.19.2")
 
     // jakarta
     implementation("jakarta.servlet:jakarta.servlet-api:6.1.0")
